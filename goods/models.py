@@ -12,7 +12,6 @@ class Categories(models.Model):
                 
     def __str__(self):
         return self.name
-    
 
 class Products(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='Название')
