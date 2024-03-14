@@ -19,7 +19,8 @@ def login(request):
                 auth.login(request, user)
                 messages.success(request, f'Вы успешно вошли в аккаунт {username}')
 
-                if request.POST.get('next', None):
+                redirect_page = request.POST.get('next', None)
+                if redirect_page and redirect_page != reverse('user:logout'):
                     return HttpResponseRedirect(request.POST.get('next'))
 
                 return HttpResponseRedirect(reverse('main:index'))
@@ -28,7 +29,7 @@ def login(request):
 
     context = {
         'title': 'Home - Авторизация',
-        'form': form
+        'form': form,
     }
     return render(request, 'users/login.html', context)
 
